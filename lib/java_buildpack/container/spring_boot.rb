@@ -40,6 +40,22 @@ module JavaBuildpack
         super
       end
 
+      # (see JavaBuildpack::Component::BaseComponent#compile)
+      def compile
+        # @droplet.environment_variables.add_environment_variable 'MAPR_HOME', '/opt/mapr'
+        super
+        # `curl http://package.mapr.com/releases/v6.0.0/ubuntu/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb > /tmp`
+        # `dpkg -i /tmp/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb`
+      
+        # /opt/mapr
+        # MAPR_HOME = /opt/mapr
+        # `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+        # `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+        # `ls /opt/mapr`
+        # `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+        # cf set-env MAPR_CONFIG_ "/opt/mapr/server/configure.sh -N mapr8b -C azruxmaprb04.anadarko.com:7222 -c"
+      end
+
       protected
 
       # (see JavaBuildpack::Container::DistZipLike#id)
