@@ -44,16 +44,17 @@ module JavaBuildpack
       def compile
         `curl http://package.mapr.com/releases/v6.0.0/ubuntu/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb > /tmp`
         `dpkg -i /tmp/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb`
-        
+
+        `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+        `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+        `ls /opt/mapr`
+        `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+
         @droplet.environment_variables.add_environment_variable 'MAPR_HOME', '/opt/mapr'
         super
 
         # /opt/mapr
         # MAPR_HOME = /opt/mapr
-        # `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
-        # `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
-        # `ls /opt/mapr`
-        # `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
         # cf set-env MAPR_CONFIG_ "/opt/mapr/server/configure.sh -N mapr8b -C azruxmaprb04.anadarko.com:7222 -c"
       end
 
