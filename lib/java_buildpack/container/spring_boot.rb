@@ -45,10 +45,11 @@ module JavaBuildpack
         `curl http://package.mapr.com/releases/v6.0.0/ubuntu/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb > /tmp`
         `dpkg -i /tmp/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb`
 
-        `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
-        `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
-        `ls /opt/mapr`
-        `echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+        def noticeMe = "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+        print "#{'----->'.red.bold} #{noticeMe} #{name.blue.bold} ls /opt/mapr"
+        print `ls /opt/mapr`
+        print "#{'----->'.red.bold} #{noticeMe} #{name.blue.bold} ls /opt/mapr"
 
         @droplet.environment_variables.add_environment_variable 'MAPR_HOME', '/opt/mapr'
         super
