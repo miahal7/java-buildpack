@@ -42,16 +42,18 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-        `curl http://package.mapr.com/releases/v6.0.0/ubuntu/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb > /tmp`
-        `dpkg -i /tmp/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb`
+        shell "curl http://package.mapr.com/releases/v6.0.0/ubuntu/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb > /tmp"
+        shell "dpkg -i /tmp/mapr-client-6.0.0.20171109191718.GA-1.amd64.deb"
 
         notice_me = "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
         print "#{'----->'.red.bold} #{notice_me} #{name.blue.bold} ls /opt/mapr"
-        print `ls /opt/mapr`
+        shell "ls /opt/mapr"
         print "#{'----->'.red.bold} #{notice_me} #{name.blue.bold} ls /opt/mapr"
 
         @droplet.environment_variables.add_environment_variable 'MAPR_HOME', '/opt/mapr'
+
+        shell "/opt/mapr/server/configure.sh -N mapr8b -C azruxmaprb04.anadarko.com:7222 -c"
         super
 
         # /opt/mapr
